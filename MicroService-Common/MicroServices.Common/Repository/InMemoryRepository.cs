@@ -61,6 +61,7 @@ namespace MicroServices.Common.Repository
                 {
                     bus.Publish(latestEvent);
                 }
+                latestEvents.Clear();
             }
             aggregate.MarkEventsAsCommitted();
         }
