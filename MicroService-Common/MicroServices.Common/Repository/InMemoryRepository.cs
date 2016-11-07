@@ -57,9 +57,11 @@ namespace MicroServices.Common.Repository
             latestEvents.AddRange(eventsToSave);
             if (bus != null)
             {
-                foreach (var latestEvent in latestEvents)
+                for (var index = latestEvents.Count - 1; index >= 0; index--)
                 {
+                    var latestEvent = latestEvents[index];
                     bus.Publish(latestEvent);
+                    latestEvents.RemoveAt(index);
                 }
             }
             aggregate.MarkEventsAsCommitted();
